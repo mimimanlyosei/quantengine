@@ -10,22 +10,22 @@ def index():
 
 @app.route("/register")
 def register():
-    return "register"
+    return render_template("register.html")
 
 
 @app.route("/login")
 def login():
-    return "login"
+    return render_template("login.html")
 
 
 @app.route('/calculate')
 def calculate():
-    return "calculate"
+    return render_template("calculate.html")
 
 
 @app.route("/history")
 def history():
-    return "history"
+    return render_template("history.html")
 
 
 if __name__ == '__main__':
