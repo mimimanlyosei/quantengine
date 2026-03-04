@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin
 from sqlalchemy import text
@@ -48,8 +48,18 @@ def create_app():
         return render_template("index.html")
 
 
-    @app.route("/register")
+    @app.route("/register", methods=["GET", "POST"])
     def register():
+        if request.method == "POST":
+            username = request.form.get("username")
+            email = request.form.get("email")
+            password = request.form.get("password")
+            confirm = request.form.get("confirm_password")
+
+            print("Form Submitted", username, email, password, confirm)
+
+            return f"Received data - {email}"
+        
         return render_template("register.html")
 
 
