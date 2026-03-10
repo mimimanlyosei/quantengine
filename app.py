@@ -1,7 +1,8 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin
 from sqlalchemy import text
+import re
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -50,15 +51,19 @@ def create_app():
 
     @app.route("/register", methods=["GET", "POST"])
     def register():
+        errors = []
+
+        
         if request.method == "POST":
-            username = request.form.get("username")
-            email = request.form.get("email")
-            password = request.form.get("password")
-            confirm = request.form.get("confirm_password")
+            username = (request.form.get("username")or "").strip()
+            email = (request.form.get("email")or "").strip()
+            password = request.form.get("password")or ""
+            confirm = request.form.get("confirm_password")or ""
+            
+            if not (3 <= len(username) <= 80):
+                errors.append("Username must be between 3 and 80 characters")
 
-            print("Form Submitted", username, email, password, confirm)
-
-            return f"Received data - {email}"
+            return redirect(url_for("dashboard", name=username))
         
         return render_template("register.html")
 
@@ -67,6 +72,27 @@ def create_app():
     def login():
         return render_template("login.html")
     
+    @app.route("/logout")
+    def logout():
+        return render_template("logout.html")
+    
+    @app.route("/dashboard/<name>")
+    def dashboard(name):
+        return render_template("dashboard.html", name=name)
+    
+
+    @app.route('/calculate')
+    def calculate():
+        return render_template("calculate.html")
+
+
+    @app.route("/history")
+    def history():
+        return render_template("history.html")
+    
+    @app.route("/404")
+    def error_404():
+        return render_template("404.html")
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -77,14 +103,6 @@ def create_app():
 
 
 
-# @app.route('/calculate')
-# def calculate():
-#     return render_template("calculate.html")
-
-
-# @app.route("/history")
-# def history():
-#     return render_template("history.html")
 
 
 if __name__ == '__main__':

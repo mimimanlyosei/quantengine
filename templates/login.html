@@ -1,1 +1,26 @@
-<h1>Login here please</h1>
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<form method="POST">
+    <br />
+    <input
+    type="text"
+    name="username"
+    placeholder="Create a username"
+    /><br />
+
+    <input
+    type="text"
+    name="password"
+    placeholder="Create a password"
+    /><br /> <br />
+
+    <button type="submit">Log In</button>
+</form>
+
+
+{% endblock %}
+
+
