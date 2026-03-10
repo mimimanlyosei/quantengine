@@ -4,5 +4,49 @@
 {% block content %}
 
 <h1>Calculate your risk and reward here please</h1>
+
+<br>
+<form action="/calculate" method="POST">
+    <label for="initial_investment" id="initial_investment">Initial Investment Amount (£):</label><br>
+
+    <input
+    type="text"
+    name="initial_investment"
+    placeholder="e.g. 10000"
+    /><br /> <br />
+
+    <label for="expected_return" id="expected_return">Expected Return (%):</label><br>
+    <input
+    type="text"
+    name="expected_return"
+    placeholder="e.g.: 5"
+    /><br /> <br />
+
+    <label for="years_of_investment" id="years_of_investment">Years of Investment:</label><br>
+    <input
+    type="text"
+    name="years_of_investment"
+    placeholder="e.g. 10"
+    /><br /> <br />
+
+
+    <label for="risk_appetite" id="risk_appetite">Risk Appetite:</label><br>
+    <input
+    type="radio"
+    name="risk_appetite"
+    value="low"
+    /><label for="low">Low</label>
+    <input
+    type="radio"
+    name="risk_appetite"
+    value="medium"
+    /><label for="medium">Medium</label>
+    <input
+    type="radio"
+    name="risk_appetite"
+    value="high"
+    /><label for="high">High</label><br /> <br />
+    <button type="submit">Calculate</button>
+</form>
 {% endblock %}
 
