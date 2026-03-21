@@ -257,8 +257,20 @@ def create_app():
     @app.route("/history")
     @login_required
     def history():
-        return render_template("history.html")
-    
+        scenarios = Scenario.query.filter_by(user_id=current_user.id).all()
+        return render_template("history.html", scenarios=scenarios)
+
+    @app.route("/delete_scenario/<int:scenario_id>", methods=["POST"])
+    def delete_scenario(scenario_id):
+        scenario = Scenario.query.get(scenario_id)
+        if scenario and scenario.user_id == current_user.id:
+            db.session.delete(scenario)
+            db.session.commit()
+            flash("Scenario deleted successfully!", "success")
+        else:
+            flash("Scenario not found or you don't have permission to delete it.", "error")
+        return redirect(url_for("history"))
+
     @app.route("/404")
     def error_404():
         return render_template("404.html")
