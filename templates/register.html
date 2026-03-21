@@ -3,6 +3,12 @@
 
 {% block content %}
 
+{% if errors %}
+        {% for error in errors %}
+            <p class="errors">{{ error }}</p>
+        {% endfor %}
+{% endif %}
+
 <br>
 <form method="POST">
     <input

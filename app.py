@@ -1,13 +1,15 @@
+import re
 from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin
 from sqlalchemy import text
-import re
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 db = SQLAlchemy()
 login_manager = LoginManager()
 
-
+ # Define the User model for authentication and user management
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
@@ -60,12 +62,56 @@ def create_app():
             password = request.form.get("password")or ""
             confirm = request.form.get("confirm_password")or ""
             
+            # Basic validation
+
+            # Check if username is empty
             if not (3 <= len(username) <= 80):
                 errors.append("Username must be between 3 and 80 characters")
 
-            return redirect(url_for("dashboard", name=username))
+            # Check if email is empty
+            if email == "":
+                errors.append("Email is required")
+
+            # Check if password is empty
+            if password == "":
+                errors.append("Password is required")
+            elif len(password) < 8:
+                errors.append("Password must be at least 8 characters")
+
+            # Check if passwords match
+            if confirm == "":
+                errors.append("Please confirm your password")
+            
+            elif password != confirm:
+                errors.append("Passwords do not match")
+
+
+
+            # Check if username already exists
+            if errors == []:
+                if User.query.filter_by(username=username).first():
+                    errors.append("Username already exists")
+                elif User.query.filter_by(email=email).first():
+                    errors.append("Email already exists")
+                else:    
+                    # If we get here, all validation has passed - create the user
+                    password_hash = generate_password_hash(password)
+                    new_user = User(username=username, email=email, password_hash=password_hash)
+                    db.session.add(new_user)
+                    db.session.commit()
+                    flash("Registration successful! Please log in.", "success")
+
+
+
+
+            if errors:
+                return render_template("register.html", errors=errors)
+
+            return redirect(url_for("login"))
         
-        return render_template("register.html")
+
+        
+        return render_template("register.html", errors=errors)
 
 
     @app.route("/login")
