@@ -117,9 +117,6 @@ def create_app():
 
 
 
-
-
-
     @app.route("/login", methods=["GET", "POST"])
     def login():
         errors = []
@@ -141,12 +138,10 @@ def create_app():
 
     
 
-
-
-
     @app.route("/logout")
     def logout():
-        return render_template("logout.html")
+        logout_user()
+        return redirect(url_for("index"))
     
     @app.route("/dashboard/<name>")
     def dashboard(name):
