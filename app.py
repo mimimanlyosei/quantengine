@@ -83,9 +83,55 @@ def create_app():
 
     @app.route('/calculate', methods=["GET", "POST"])
     def calculate():
+        errors = []
 
         if request.method == "POST":
-            print("POST received")
+            
+            # Validate and process form data
+
+            # Validate initial investment
+            try:
+                initial_investment = float(request.form.get("initial_investment"))
+            except ValueError:
+                errors.append("Please enter a valid initial investment amount.")
+            else:
+                if initial_investment <= 0:
+                    errors.append("Initial investment cannot be less than £1.")
+            
+
+            # Validate expected return
+            try:
+                expected_return = float(request.form.get("expected_return"))
+            except ValueError:
+                errors.append("Please enter a valid expected return.")
+            else:
+                if expected_return < 0 or expected_return > 50:
+                    errors.append("Expected return must be between 0% and 50%.")
+
+            # Validate years of investment
+            try:
+                years_of_investment = int(request.form.get("years_of_investment"))
+            except ValueError:
+                errors.append("Please enter a valid number of years.")
+            else:
+                if years_of_investment <= 0 or years_of_investment > 70:
+                    errors.append("Years of investment must be between 1 and 70.")
+
+            # Validate risk appetite
+            risk_appetite = str(request.form.get("risk_appetite"))
+            if risk_appetite not in ["low", "medium", "high"]:
+                errors.append("Please select a valid risk appetite.")
+
+            if errors:
+                return render_template("calculate.html", errors=errors,)
+            else:
+                print(f"Initial Investment: {initial_investment}")
+                print(f"Expected Return: {expected_return}")
+                print(f"Years of Investment: {years_of_investment}")
+                print(f"Risk Appetite: {risk_appetite}")
+            # if we get here, all inputs are valid
+            print("All inputs are valid - ready to calculate")
+        
         return render_template("calculate.html")
 
 

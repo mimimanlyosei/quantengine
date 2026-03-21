@@ -3,6 +3,13 @@
 
 {% block content %}
 
+{% if errors %}
+    {% for error in errors %}
+        <p id="errors">{{ error }}</p>
+    {% endfor %}
+{% endif %}
+
+
 <h1>Calculate your risk and reward here please</h1>
 
 <br>
