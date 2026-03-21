@@ -1,7 +1,7 @@
 import re
 from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, UserMixin
+from flask_login import LoginManager, UserMixin, login_user, logout_user
 from sqlalchemy import text
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -114,10 +114,36 @@ def create_app():
         return render_template("register.html", errors=errors)
 
 
-    @app.route("/login")
+
+
+
+
+
+
+    @app.route("/login", methods=["GET", "POST"])
     def login():
-        return render_template("login.html")
+        errors = []
+
+
+        if request.method == "POST":
+            username = request.form.get("username")
+            password = request.form.get("password")
+
+            user = User.query.filter_by(username=username).first()
+
+            if user and check_password_hash(user.password_hash, password):
+                login_user(user)
+                flash("Logged in successfully!", "success")
+                return redirect(url_for("dashboard", name=user.username))
+            else:
+                errors.append("Invalid username or password")
+        return render_template("login.html", errors=errors)
+
     
+
+
+
+
     @app.route("/logout")
     def logout():
         return render_template("logout.html")
