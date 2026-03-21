@@ -1,10 +1,10 @@
 import re
 
+from datetime import datetime
+from sqlalchemy import text
 from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, UserMixin, login_user, logout_user
-from sqlalchemy import text
-from datetime import datetime
+from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -170,6 +170,7 @@ def create_app():
     
 
     @app.route('/calculate', methods=["GET", "POST"])
+    @login_required
     def calculate():
         errors = []
         results = []
@@ -237,10 +238,24 @@ def create_app():
             print(f"Optimistic Result: {optimistic_result}")
             print(f"Pessimistic Result: {pessimistic_result}")
 
+            new_scenario = Scenario(
+                user_id=current_user.id,
+                initial_investment=initial_investment,
+                expected_return=expected_return,
+                years_of_investment=years_of_investment,
+                risk_appetite=risk_appetite,
+                base_result=base_result,
+                optimistic_result=optimistic_result,
+                pessimistic_result=pessimistic_result
+            )
+            db.session.add(new_scenario)
+            db.session.commit()
+
         return render_template("calculate.html", errors=errors, results=results, risk_appetite=risk_appetite)
 
 
     @app.route("/history")
+    @login_required
     def history():
         return render_template("history.html")
     
