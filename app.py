@@ -81,8 +81,11 @@ def create_app():
         return render_template("dashboard.html", name=name)
     
 
-    @app.route('/calculate')
+    @app.route('/calculate', methods=["GET", "POST"])
     def calculate():
+
+        if request.method == "POST":
+            print("POST received")
         return render_template("calculate.html")
 
 
