@@ -84,6 +84,8 @@ def create_app():
     @app.route('/calculate', methods=["GET", "POST"])
     def calculate():
         errors = []
+        results = []
+        risk_appetite = None
 
         if request.method == "POST":
             
@@ -123,7 +125,7 @@ def create_app():
                 errors.append("Please select a valid risk appetite.")
 
             if errors:
-                return render_template("calculate.html", errors=errors,)
+                return render_template("calculate.html", errors=errors,results=results)
             else:
                 print(f"Initial Investment: {initial_investment}")
                 print(f"Expected Return: {expected_return}")
@@ -133,7 +135,6 @@ def create_app():
             print("All inputs are valid - ready to calculate")
 
             # Perform calculations
-
             swing = 0.05
             base_rate = expected_return / 100
             optimistic_rate = base_rate + swing
@@ -143,11 +144,12 @@ def create_app():
             optimistic_result = round(initial_investment * ((1 + optimistic_rate) ** years_of_investment), 2)
             pessimistic_result = round(initial_investment * ((1 + pessimistic_rate) ** years_of_investment), 2)
 
+            results = [base_result, optimistic_result, pessimistic_result]
             print(f"Base Result: {base_result}")
             print(f"Optimistic Result: {optimistic_result}")
             print(f"Pessimistic Result: {pessimistic_result}")
 
-        return render_template("calculate.html")
+        return render_template("calculate.html", errors=errors, results=results, risk_appetite=risk_appetite)
 
 
     @app.route("/history")

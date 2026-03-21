@@ -55,5 +55,26 @@
     /><label for="high">High</label><br /> <br />
     <button type="submit">Calculate</button>
 </form>
+
+{% if results %}
+    <h2>Your Results:</h2>
+
+    <div class="{{ 'highlight' if risk_appetite == 'low' else '' }}">
+        <h3>Low Risk Scenario</h3>
+        <p>Final Value: £{{ results[2] }}</p>
+    </div>
+
+    <div class="{{ 'highlight' if risk_appetite == 'medium' else '' }}">
+        <h3>Medium Risk Scenario</h3>
+        <p>Final Value: £{{ results[0] }}</p>
+    </div>
+
+    <div class="{{ 'highlight' if risk_appetite == 'high' else '' }}">
+        <h3>High Risk Scenario</h3>
+        <p>Final Value: £{{ results[1] }}</p>
+    </div>
+{% endif %}
+
+
 {% endblock %}
 
