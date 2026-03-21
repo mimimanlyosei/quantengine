@@ -131,7 +131,22 @@ def create_app():
                 print(f"Risk Appetite: {risk_appetite}")
             # if we get here, all inputs are valid
             print("All inputs are valid - ready to calculate")
-        
+
+            # Perform calculations
+
+            swing = 0.05
+            base_rate = expected_return / 100
+            optimistic_rate = base_rate + swing
+            pessimistic_rate = base_rate - swing
+
+            base_result = round(initial_investment * ((1 + base_rate) ** years_of_investment), 2)
+            optimistic_result = round(initial_investment * ((1 + optimistic_rate) ** years_of_investment), 2)
+            pessimistic_result = round(initial_investment * ((1 + pessimistic_rate) ** years_of_investment), 2)
+
+            print(f"Base Result: {base_result}")
+            print(f"Optimistic Result: {optimistic_result}")
+            print(f"Pessimistic Result: {pessimistic_result}")
+
         return render_template("calculate.html")
 
 
