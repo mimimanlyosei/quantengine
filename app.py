@@ -3,43 +3,17 @@ import re
 from datetime import datetime
 from sqlalchemy import text
 from flask import Flask, render_template, url_for, request, redirect, flash
-from flask_sqlalchemy import SQLAlchemy
+from app import db
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.config import Config
+from app.models import User, Scenario
 
 
 
 
-db = SQLAlchemy()
 login_manager = LoginManager()
 
- # Define the User model for authentication and user management
-class User(UserMixin, db.Model):
-    '''This class defines the User model for authentication and user management.
-    It inherits from UserMixin to integrate with
-    '''
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(255), nullable=False)
-
-    def __repr__(self):
-        return f"<User {self.username}>"
-    
-class Scenario(db.Model):
-    '''This class defines the Scenario model for storing investment scenarios created by users.
-    '''
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    initial_investment = db.Column(db.Float, nullable=False)
-    expected_return = db.Column(db.Float, nullable=False)
-    years_of_investment = db.Column(db.Integer, nullable=False)
-    risk_appetite = db.Column(db.String(20), nullable=False)
-    base_result = db.Column(db.Float, nullable=False)
-    optimistic_result = db.Column(db.Float, nullable=False)
-    pessimistic_result = db.Column(db.Float, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 def create_app():
     '''
@@ -49,8 +23,8 @@ def create_app():
 
     app = Flask(__name__)
     app.config.from_object(Config)
-
     db.init_app(app)
+
     login_manager.init_app(app)
     login_manager.login_view = 'login'
 
