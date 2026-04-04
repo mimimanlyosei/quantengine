@@ -6,6 +6,7 @@ from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
+from app.config import Config
 
 
 
@@ -47,10 +48,7 @@ def create_app():
     '''
 
     app = Flask(__name__)
-
-    app.config['SECRET_KEY'] = 'this-is-a-secret'
-    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///app.db"
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config.from_object(Config)
 
     db.init_app(app)
     login_manager.init_app(app)
