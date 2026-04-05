@@ -16,7 +16,7 @@
         <p>Base Result: £{{ "%.2f"|format(scenario.base_result) }}</p>
         <p>Optimistic Result: £{{ "%.2f"|format(scenario.optimistic_result) }}</p>
         <p>Pessimistic Result: £{{ "%.2f"|format(scenario.pessimistic_result) }}</p>
-        <form method="POST" action="{{ url_for('delete_scenario', scenario_id=scenario.id) }}" onsubmit="return confirm('Are you sure you want to delete this scenario?')">
+        <form method="POST" action="{{ url_for('history.delete_scenario', scenario_id=scenario.id) }}" onsubmit="return confirm('Are you sure you want to delete this scenario?')">
             <button type="submit">Delete</button>
         </form>
         <hr>
