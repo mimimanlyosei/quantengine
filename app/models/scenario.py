@@ -1,19 +1,5 @@
 from datetime import datetime
-from flask_login import UserMixin
 from app import db
-
-class User(UserMixin, db.Model):
-    '''This class defines the User model for authentication and user management.
-    It inherits from UserMixin to integrate with
-    '''
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(255), nullable=False)
-
-    def __repr__(self):
-        return f"<User {self.username}>"
-    
 
 class Scenario(db.Model):
     '''This class defines the Scenario model for storing investment scenarios created by users.
