@@ -3,42 +3,18 @@ import re
 from datetime import datetime
 from sqlalchemy import text
 from flask import Flask, render_template, url_for, request, redirect, flash
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
+from app.config import Config
+from app.models import User, Scenario
+from app.calculations import calculate_scenarios
+from app import db
 
 
 
 
-db = SQLAlchemy()
 login_manager = LoginManager()
 
- # Define the User model for authentication and user management
-class User(UserMixin, db.Model):
-    '''This class defines the User model for authentication and user management.
-    It inherits from UserMixin to integrate with
-    '''
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(255), nullable=False)
-
-    def __repr__(self):
-        return f"<User {self.username}>"
-    
-class Scenario(db.Model):
-    '''This class defines the Scenario model for storing investment scenarios created by users.
-    '''
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    initial_investment = db.Column(db.Float, nullable=False)
-    expected_return = db.Column(db.Float, nullable=False)
-    years_of_investment = db.Column(db.Integer, nullable=False)
-    risk_appetite = db.Column(db.String(20), nullable=False)
-    base_result = db.Column(db.Float, nullable=False)
-    optimistic_result = db.Column(db.Float, nullable=False)
-    pessimistic_result = db.Column(db.Float, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 def create_app():
     '''
@@ -47,12 +23,9 @@ def create_app():
     '''
 
     app = Flask(__name__)
-
-    app.config['SECRET_KEY'] = 'this-is-a-secret'
-    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///app.db"
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+    app.config.from_object(Config)
     db.init_app(app)
+
     login_manager.init_app(app)
     login_manager.login_view = 'login'
 
@@ -224,19 +197,10 @@ def create_app():
             print("All inputs are valid - ready to calculate")
 
             # Perform calculations
-            swing = 0.05
-            base_rate = expected_return / 100
-            optimistic_rate = base_rate + swing
-            pessimistic_rate = base_rate - swing
-
-            base_result = round(initial_investment * ((1 + base_rate) ** years_of_investment), 2)
-            optimistic_result = round(initial_investment * ((1 + optimistic_rate) ** years_of_investment), 2)
-            pessimistic_result = round(initial_investment * ((1 + pessimistic_rate) ** years_of_investment), 2)
-
+            base_result, optimistic_result, pessimistic_result = calculate_scenarios(
+                initial_investment, expected_return, years_of_investment
+            )
             results = [base_result, optimistic_result, pessimistic_result]
-            print(f"Base Result: {base_result}")
-            print(f"Optimistic Result: {optimistic_result}")
-            print(f"Pessimistic Result: {pessimistic_result}")
 
             new_scenario = Scenario(
                 user_id=current_user.id,
