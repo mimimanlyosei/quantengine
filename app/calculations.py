@@ -4,7 +4,7 @@ def calculate_scenarios(initial_investment, expected_return, years_of_investment
     
     Args:
         initial_investment (float): Starting investment amount.
-        expected_return (float): Expected annualreturn as a percentage (e.g., 7 for 7%).
+        expected_return (float): Expected annual return as a percentage (e.g., 7 for 7%).
         years_of_investment (int): Number of years to invest.
 
     Returns:
