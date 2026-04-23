@@ -4,24 +4,33 @@
 {% block content %}
 
 
-<h1>Check the history of your scenarios here please</h1>
+<h1>Your Scenarios</h1>
 
 {% if scenarios %}
+    <div class="scenario-grid">
     {% for scenario in scenarios %}
-        <h3>Date: {{ scenario.created_at.strftime('%Y-%m-%d') }}    </h3>
-        <p>Initial Investment: £{{ "%.2f"|format(scenario.initial_investment) }}</p>
-        <p>Expected Return: {{ "%.2f"|format(scenario.expected_return) }}%</p>
-        <p>Years of Investment: {{ scenario.years_of_investment }}</p>
-        <p>Risk Appetite: {{ scenario.risk_appetite }}</p>
-        <p>Base Result: £{{ "%.2f"|format(scenario.base_result) }}</p>
-        <p>Optimistic Result: £{{ "%.2f"|format(scenario.optimistic_result) }}</p>
-        <p>Pessimistic Result: £{{ "%.2f"|format(scenario.pessimistic_result) }}</p>
-        <form method="POST" action="{{ url_for('history.delete_scenario', scenario_id=scenario.id) }}" onsubmit="return confirm('Are you sure you want to delete this scenario?')">
-            <button type="submit">Delete</button>
-        </form>
-        <hr>
+        <div class="scenario-card">
+            <div class="scenario-card-header">
+                <span class="scenario-date">{{ scenario.created_at.strftime('%Y-%m-%d') }}</span>
+                <span class="risk-badge {{ scenario.risk_appetite }}">{{ scenario.risk_appetite | capitalize }}</span>
+            </div>
+
+            <div class="scenario-details">
+                <p>💰 Initial: £{{ "%.2f"|format(scenario.initial_investment) }}</p>
+                <p>📈 Return: {{ "%.2f"|format(scenario.expected_return) }}%</p>
+                <p>📅 Years: {{ scenario.years_of_investment }}</p>
+                <p>📊 Base: £{{ "%.2f"|format(scenario.base_result) }}</p>
+                <p>🚀 Optimistic: £{{ "%.2f"|format(scenario.optimistic_result) }}</p>
+                <p>📉 Pessimistic: £{{ "%.2f"|format(scenario.pessimistic_result) }}</p>
+            </div>
+            <div class="scenario-card-footer">
+                <form method="POST" action="{{ url_for('history.delete_scenario', scenario_id=scenario.id) }}" onsubmit="return confirm('Are you sure you want to delete this scenario?')">
+                    <button type="submit" class="btn-delete">Delete</button>
+                </form>
+            </div>
+        </div>
     {% endfor %}
 {% else %}
-    <p>No scenarios saved yet. Go to the calculator to create one.</p>
+    <p>No scenarios saved yet. <a href="{{ url_for('calculate.calculate') }}">Create one!</a></p>
 {% endif %}
 {% endblock %}

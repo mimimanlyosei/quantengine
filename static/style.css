@@ -1,4 +1,4 @@
-/* --- Base & Variables ---- */
+/* --- Base & Variables ---------- */
 
 :root {
     --pink:     #f6aeaa;
@@ -30,7 +30,7 @@ main {
     padding: 0 1rem;
 }
 
-/* --- Header & Nav -------- */
+/* --- Header & Nav -------------- */
 
 header {
     background-color: var(--teal);
@@ -66,7 +66,7 @@ nav a:hover {
 }
 
 
-/* --- Forms --------------- */
+/* --- Forms --------------------- */
 
 .form-group {
     margin-bottom: 1.25rem;
@@ -108,7 +108,7 @@ button[type="submit"]:hover {
     opacity: 0.85;
 }
 
-/* --- Risk Selector Cards - */
+/* --- Risk Selector Cards ------- */
 
 .risk-selector {
     display: grid;
@@ -140,7 +140,7 @@ button[type="submit"]:hover {
 .risk-card.medium.selected    { border-color: var(--amber); }
 .risk-card.high.selected      { border-color: var(--red); }
 
-/* --- Results ------------- */
+/* --- Results ------------------- */
 
 .results-grid {
     display: grid;
@@ -177,5 +177,72 @@ button[type="submit"]:hover {
     color: var(--text);
 }
 
+/* --- Scenario Cards (History) -- */
 
-/* --- ect ----------------- */
+.scenario-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.scenario-card {
+    background-color: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.scenario-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.scenario-date {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #6b7280;
+}
+
+.risk-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.risk-badge.low    { background-color: #d1fae5; color: #065f46; }
+.risk-badge.medium { background-color: #fef3c7; color: #92400e; }
+.risk-badge.high   { background-color: #fce4dd; color: #9f1239; }
+
+.scenario-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.scenario-card-footer {
+    display: flex
+    justify-content: flex-end;
+}
+
+.btn-delete {
+    background-color: var(--red);
+    color: white;
+    border: none;
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn-delete:hover {
+    opacity: 0.85;
+}
+
+
+/* --- ect ----------------------- */
