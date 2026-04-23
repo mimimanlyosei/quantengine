@@ -37,6 +37,18 @@ Started as a bootcamp capstone project (Career Tree, March 2026), QuantEngine ha
 | Deployment | Render |
 
 ---
+## Design
+
+| Token | Value | Usage |
+|---|---|---|
+| Primary Pink | `#f6aeaa` | Buttons, accents, brand colour |
+| Teal | `#0d9488` | Header background |
+| Background | `#fdfbf9` | Warm off-white page background |
+| Success Green | `#10b981` | Low risk indicators |
+| Warning Amber | `#f59e0b` | Medium risk indicators |
+
+Responsive design with CSS Grid and Flexbox — layouts adapt from three-column desktop to single-column mobile at 600px breakpoint.
+---
 
 ## Project Structure
 
@@ -127,7 +139,7 @@ This project is developed using a structured workflow to simulate professional e
 |---|---|
 | ✅ Code Quality & Architecture | Complete — Blueprints, app factory, modular models |
 | ✅ Deployment | Complete — Render, PostgreSQL, CI/CD |
-| 🔄 UI & UX Polish | In progress |
+| ✅ UI & UX Polish | Complete — responsive design, card layouts, pink colour scheme |
 | ⬜ Testing | Upcoming — pytest unit and route tests |
 | ⬜ v3.0 — F.I.R.E. Calculator | Planned |
 | ⬜ v4.0 — Monte Carlo & Backtesting | Planned |
