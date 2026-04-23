@@ -10,71 +10,93 @@
 {% endif %}
 
 
-<h1>Calculate your risk and reward here please</h1>
+<h1>Risk and Reward Calculator</h1>
 
 <br>
 <form action="/calculate" method="POST">
-    <label for="initial_investment" id="initial_investment">Initial Investment Amount (£):</label><br>
+    
+    <div class="form-group">
+        <label for="initial_investment" >Initial Investment Amount (£):</label><br>
+        <input
+        type="text"
+        id="initial_investment"
+        name="initial_investment"
+        placeholder="e.g. 10000"
+        />
+    </div>    
 
-    <input
-    type="text"
-    name="initial_investment"
-    placeholder="e.g. 10000"
-    /><br /> <br />
+    <div class="form-group">
+        <label for="expected_return">Expected Return (%):</label><br>
+        <input
+        type="text"
+        name="expected_return"
+        id="expected_return"
+        placeholder="e.g.: 5"
+        />
+    </div>
 
-    <label for="expected_return" id="expected_return">Expected Return (%):</label><br>
-    <input
-    type="text"
-    name="expected_return"
-    placeholder="e.g.: 5"
-    /><br /> <br />
+    <div class="form-group">
+        <label for="years_of_investment" >Years of Investment:</label><br>
+        <input
+        type="text"
+        name="years_of_investment"
+        id="years_of_investment"
+        placeholder="e.g. 10"
+        />
+    </div>
+    
 
-    <label for="years_of_investment" id="years_of_investment">Years of Investment:</label><br>
-    <input
-    type="text"
-    name="years_of_investment"
-    placeholder="e.g. 10"
-    /><br /> <br />
-
-
-    <label for="risk_appetite" id="risk_appetite">Risk Appetite:</label><br>
-    <input
-    type="radio"
-    name="risk_appetite"
-    value="low"
-    /><label for="low">Low</label>
-    <input
-    type="radio"
-    name="risk_appetite"
-    value="medium"
-    /><label for="medium">Medium</label>
-    <input
-    type="radio"
-    name="risk_appetite"
-    value="high"
-    /><label for="high">High</label><br /> <br />
+    
+    <div class="form-group">
+        <label>Risk Appetite:</label>
+        <div class="risk-selector">
+            <label class="risk-card low"for="low">
+                <input type="radio" id="low" name="risk_appetite" value="low">
+                🟢 Low
+            </label>
+            <label class="risk-card medium" for="medium">
+                <input type="radio" id="medium" name="risk_appetite" value="medium">
+                🟡 Medium
+            </label>
+            
+            <label class="risk-card high" for="high">
+                <input type="radio" id="high" name="risk_appetite" value="high">
+                🔴 High
+            </label>
+        </div>
+    </div>
+    
     <button type="submit">Calculate</button>
 </form>
 
 {% if results %}
     <h2>Your Results:</h2>
-
-    <div class="{{ 'highlight' if risk_appetite == 'low' else '' }}">
-        <h3>Low Risk Scenario</h3>
-        <p>Final Value: £{{ results[2] }}</p>
-    </div>
-
-    <div class="{{ 'highlight' if risk_appetite == 'medium' else '' }}">
-        <h3>Medium Risk Scenario</h3>
-        <p>Final Value: £{{ results[0] }}</p>
-    </div>
-
-    <div class="{{ 'highlight' if risk_appetite == 'high' else '' }}">
-        <h3>High Risk Scenario</h3>
-        <p>Final Value: £{{ results[1] }}</p>
+    <div class="results-grid">
+        <div class="result-card low {{ 'selected' if risk_appetite == 'low' else '' }}">
+            <h3>Low Risk Scenario</h3>
+            <p>Final Value: £{{ results[2] }}</p>
+        </div>
+    
+        <div class="result-card medium {{ 'selected' if risk_appetite == 'medium' else '' }}">
+            <h3>Medium Risk Scenario</h3>
+            <p>Final Value: £{{ results[0] }}</p>
+        </div>
+    
+        <div class="result-card high {{ 'selected' if risk_appetite == 'high' else '' }}">
+            <h3>High Risk Scenario</h3>
+            <p>Final Value: £{{ results[1] }}</p>
+        </div>
     </div>
 {% endif %}
 
+<script>
+    document.querySelectorAll('.risk-card input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+            document.querySelectorAll('.risk-card').forEach(card => card.classList.remove('selected'));
+            radio.closest('.risk-card').classList.add('selected');
+        });
+    });
+</script>
 
 {% endblock %}
 

@@ -1,15 +1,181 @@
+/* --- Base & Variables ---- */
+
+:root {
+    --pink:     #f6aeaa;
+    --teal:     #0d9488;
+    --bg:       #fdfbf9;
+    --border:   #f3e8e3;
+    --text:     #1f2937;
+    --green:    #10b981;
+    --amber:    #f59e0b;
+    --red:      #ef4444;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    font-family: monospace;
-    background-color: #f6aeaa;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
 }
 
-.errors {
-    color: red;
-    font-size: 14px;
-    margin-bottom: 10px;
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
 }
 
-.highlight {
-    border: 2px solid rgb(190, 28, 28);
-    padding: 10px;
+/* --- Header & Nav -------- */
+
+header {
+    background-color: var(--teal);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+
+header h1 {
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+nav{
+    display: flex;
+    gap: 0.5rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+nav a:hover {
+    background-color: var(--pink);
+    color: var(--text);
+}
+
+
+/* --- Forms --------------- */
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label{
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+    border-color: var(--pink);
+}
+
+button[type="submit"] {
+    background-color: var(--pink);
+    color: var(--text);
+    border: none;
+    padding: 0.7rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+button[type="submit"]:hover {
+    opacity: 0.85;
+}
+
+/* --- Risk Selector Cards - */
+
+.risk-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.risk-card {
+    display: block;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    font-weight: 600;
+    text-align: center;
+    transition: border-color 0.2s;
+}
+
+.risk-card input[type="radio"] {
+    display: none;
+}
+
+.risk-card.low      { background-color: #d1fae5; }
+.risk-card.medium   { background-color: #fef3c7; }
+.risk-card.high     { background-color: #fce4dd; }
+
+.risk-card.low.selected       { border-color: var(--green); }
+.risk-card.medium.selected    { border-color: var(--amber); }
+.risk-card.high.selected      { border-color: var(--red); }
+
+/* --- Results ------------- */
+
+.results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.result-card {
+    background-color: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.result-card.low    { border-top: 4px solid var(--green); }
+.result-card.medium { border-top: 4px solid var(--amber); }
+.result-card.high   { border-top: 4px solid var(--red); }
+
+.result-card.low.selected    { box-shadow: 0 4px 12px rgba(16,185,129,0.3); transform: translateY(-2px); }
+.result-card.medium.selected { box-shadow: 0 4px 12px rgba(245,158,11,0.3); transform: translateY(-2px); }
+.result-card.high.selected   { box-shadow: 0 4px 12px rgba(246,174,170,0.5); transform: translateY(-2px); }
+
+.result-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.result-card .amount {
+    font-size: 1.5rem;
+    font-weight: 700
+    color: var(--text);
+}
+
+
+/* --- ect ----------------- */
