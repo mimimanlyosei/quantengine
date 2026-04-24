@@ -327,4 +327,32 @@ header a img {
     display: block;
 }
 
+
+/* --- Footer -------------------- */
+
+footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: #6b7280;
+    font-size: 0.875rem;
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+}
+
+footer a {
+    color: var(--teal);
+    text-decoration: none;
+    margin: 0 0.5rem;
+    transition: color 0.2s;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer p + p {
+    margin-top: 0.5rem;
+}
+
+
 /* --- ect ---------------------- */

@@ -35,10 +35,12 @@ def create_app():
     from app.routes.auth import auth_bp
     from app.routes.calculate import calculate_bp
     from app.routes.history import history_bp
+    from app.routes.info import info_bp
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(calculate_bp)
     app.register_blueprint(history_bp)
+    app.register_blueprint(info_bp)
 
     # User loader callback for Flask-Login
     from app.models import User

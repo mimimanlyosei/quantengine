@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="scenario-card">
+    <h1>About QuantEngine</h1>
+    <p>QuantEngine is a full-stack investment scenario calculator that takes the guesswork out of financial planning.</p>
+    <p style="margin-top: 0.75rem;">Instead of getting a single "you'll have X in 30 years" number, QuantEngine generates three scenarios: base, optimistic, and pessimistic. This shows you the realistic range of outcomes for your investments.</p>
+    <p style="margin-top: 0.75rem;"><em>Because the future isn't a single number. It's a probability distribution.</em></p>
+</div>
+
+<div class="scenario-card">
+    <h2>What It Does</h2>
+    <p><strong>Three-Scenario Modelling</strong> — Base, optimistic, and pessimistic projections for every investment scenario. See possibilities, not just predictions.</p>
+    <p style="margin-top: 0.75rem;"><strong>Risk Appetite Selection</strong> — Choose your tolerance (Low/Medium/High) with visual risk selector cards.</p>
+    <p style="margin-top: 0.75rem;"><strong>Scenario History</strong> — Save and name your scenarios (Retirement Fund, House Deposit) to compare strategies over time.</p>
+    <p style="margin-top: 0.75rem;"><strong>User Authentication</strong> — Secure registration and login. Your scenarios are private and persistent.</p>
+    <p style="margin-top: 0.75rem;"><strong>Responsive Design</strong> — Works on desktop, tablet, and mobile.</p>
+</div>
+
+<div class="scenario-card">
+    <h2>About the Developer</h2>
+    <p>Hi, I'm <strong>Mimi Manly-Osei</strong>, a backend developer based in London.</p>
+    <p style="margin-top: 0.75rem;">I spent six years as an Agile delivery professional (Scrum Master, Agile Lead, Delivery Manager) at companies like Smart Pension and UCL, working directly alongside engineering teams. I learned how developers work, what makes software projects succeed, and how to facilitate technical collaboration.</p>
+    <p style="margin-top: 0.75rem;">Then I decided to become a developer myself.</p>
+    <p style="margin-top: 0.75rem;">QuantEngine started as a bootcamp project in March 2026. Multiple iterations later, it's a production web application with professional architecture, deployed infrastructure, and a custom design system.</p>
+    <p style="margin-top: 0.75rem;"><strong>What makes my background different:</strong> Six years working inside dev teams means I understand sprint cycles, code reviews, deployment pipelines, and technical debt. Not from theory, but from facilitating them. That cultural fluency combined with hands-on Python development is rare for someone making the career transition.</p>
+    <p style="margin-top: 0.75rem;">I'm currently seeking backend or full-stack developer roles where I can contribute to meaningful products.</p>
+</div>
+
+<div class="scenario-card">
+    <h2>Built With</h2>
+    <p><strong>Backend:</strong> Python 3.13 · Flask 3.1 · SQLAlchemy · PostgreSQL</p>
+    <p style="margin-top: 0.5rem;"><strong>Frontend:</strong> Jinja2 · Semantic HTML5 · Custom CSS design system</p>
+    <p style="margin-top: 0.5rem;"><strong>Infrastructure:</strong> Render deployment · Automated CI/CD · HTTPS with SSL</p>
+    <p style="margin-top: 0.5rem;"><strong>Architecture:</strong> Blueprint routing · App factory pattern · Modular structure</p>
+    <p style="margin-top: 0.75rem;">Code reviewed by senior engineers including a Principal Engineer.</p>
+</div>
+
+<div class="scenario-card">
+    <h2>Evolution</h2>
+    <p><strong>v2.3 (April 2026)</strong> — Professional design system, responsive layouts, scenario naming, custom logo and favicon, home page hero, release notes and about pages</p>
+    <p style="margin-top: 0.75rem;"><strong>v2.2 (April 2026)</strong> — Login and register pages styled to match the app, password field security fix</p>
+    <p style="margin-top: 0.75rem;"><strong>v2.1 (April 2026)</strong> — Initial UI overhaul: pink and teal colour scheme, card layouts, risk selector cards, colour-coded results, history cards with risk badges, responsive mobile design</p>
+    <p style="margin-top: 0.75rem;"><strong>v2.0 (April 2026)</strong> — Blueprint architecture, PostgreSQL, production deployment on Render, code reviewed by senior engineers</p>
+    <p style="margin-top: 0.75rem;"><strong>v1.0 (March 2026)</strong> — Bootcamp project, initial build with SQLite and single-file architecture</p>
+</div>
+
+<div class="scenario-card">
+    <h2>Get in Touch</h2>
+    <p><strong>GitHub:</strong> <a href="https://github.com/mimimanlyosei" style="color: var(--teal);">github.com/mimimanlyosei</a></p>
+    <p style="margin-top: 0.5rem;"><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/mimimanlyosei" style="color: var(--teal);">linkedin.com/in/mimimanlyosei</a></p>
+    <p style="margin-top: 1.5rem;">
+        <a href="{{ url_for('auth.register') }}" class="btn">Register for a free account →</a>
+    </p>
+</div>
+
+{% endblock %}
