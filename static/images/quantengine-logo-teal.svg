@@ -1,0 +1,13 @@
+<svg width="400" height="100" viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg">
+  <title>QuantEngine — logo on teal</title>
+  <rect width="400" height="100" fill="#0d9488"/>
+  <!-- Q circle -->
+  <circle cx="50" cy="52" r="30" fill="none" stroke="white" stroke-width="3.5" opacity="0.85"/>
+  <!-- Compound growth curve escaping the Q -->
+  <path d="M 34 70 Q 50 58 57 34 Q 62 16 72 7" fill="none" stroke="#f6aeaa" stroke-width="3" stroke-linecap="round"/>
+  <!-- Terminal dot on the curve -->
+  <circle cx="72" cy="6" r="4" fill="#f6aeaa"/>
+  <!-- Wordmark -->
+  <text x="98" y="44" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="700" fill="white" letter-spacing="-0.8">Quant</text>
+  <text x="98" y="74" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="300" fill="#f6aeaa" letter-spacing="-0.8">Engine</text>
+</svg>

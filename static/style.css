@@ -276,4 +276,10 @@ button[type="submit"]:hover {
     }
 
 }
+/* --- Logo ---------------------- */
+
+header a img {
+    display: block;
+}
+
 /* --- ect ---------------------- */

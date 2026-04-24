@@ -1,0 +1,10 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <title>QuantEngine Q icon — white background</title>
+  <rect width="200" height="200" fill="white"/>
+  <!-- Q circle -->
+  <circle cx="100" cy="108" r="58" fill="none" stroke="#f6aeaa" stroke-width="7"/>
+  <!-- Compound growth curve escaping the Q -->
+  <path d="M 68 140 Q 100 118 113 68 Q 122 32 140 14" fill="none" stroke="#0d9488" stroke-width="6" stroke-linecap="round"/>
+  <!-- Terminal dot -->
+  <circle cx="141" cy="12" r="8" fill="#0d9488"/>
+</svg>

@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} quantengine {% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
+    <link rel="icon" href="{{ url_for('static', filename='favicons/favicon.ico') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicons/favicon.svg') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicons/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicons/favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicons/favicon-180x180.png') }}">
 </head>
 <body>
     
     <header>
-        <h1>QuantEngine</h1>
+        <a href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='images/quantengine-logo-transparent.svg') }}" alt="QuantEngine" height="60">
+        </a>
         <nav>
             <a href="{{url_for('index')}}">Home</a>
             {% if current_user.is_authenticated %}
