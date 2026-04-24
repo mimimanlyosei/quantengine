@@ -66,6 +66,22 @@ nav a:hover {
 }
 
 
+/* --- Auth Forms ---------------- */
+
+.form-card {
+    background-color: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.form-card h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+}
+
 /* --- Forms --------------------- */
 
 .form-group {
@@ -78,7 +94,9 @@ nav a:hover {
     margin-bottom: 0.4rem;
 }
 
-.form-group input[type="text"] {
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"] {
     width: 100%;
     padding: 0.6rem 0.8rem;
     border: 1px solid var(--border);
