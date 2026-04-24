@@ -6,6 +6,7 @@ class Scenario(db.Model):
     '''
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    name = db.Column(db.String(100), nullable=True)
     initial_investment = db.Column(db.Float, nullable=False)
     expected_return = db.Column(db.Float, nullable=False)
     years_of_investment = db.Column(db.Integer, nullable=False)

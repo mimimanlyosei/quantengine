@@ -14,35 +14,24 @@
 
 <br>
 <form action="/calculate" method="POST">
+    <div class="form-group">
+        <label for="scenario_name">Scenario Name (optional):</label>
+        <input type="text" id="scenario_name" name="scenario_name" placeholder="e.g. 'My Retirement Plan'">
+    </div>
     
     <div class="form-group">
-        <label for="initial_investment" >Initial Investment Amount (£):</label><br>
-        <input
-        type="text"
-        id="initial_investment"
-        name="initial_investment"
-        placeholder="e.g. 10000"
-        />
+        <label for="initial_investment" >Initial Investment Amount (£):</label>
+        <input type="text" id="initial_investment" name="initial_investment" placeholder="e.g. 10000">
     </div>    
 
     <div class="form-group">
-        <label for="expected_return">Expected Return (%):</label><br>
-        <input
-        type="text"
-        name="expected_return"
-        id="expected_return"
-        placeholder="e.g.: 5"
-        />
+        <label for="expected_return">Expected Return (%):</label>
+        <input type="text" name="expected_return" id="expected_return" placeholder="e.g.: 5">
     </div>
 
     <div class="form-group">
-        <label for="years_of_investment" >Years of Investment:</label><br>
-        <input
-        type="text"
-        name="years_of_investment"
-        id="years_of_investment"
-        placeholder="e.g. 10"
-        />
+        <label for="years_of_investment" >Years of Investment:</label>
+        <input type="text" name="years_of_investment" id="years_of_investment" placeholder="e.g. 10">
     </div>
     
 
@@ -72,6 +61,7 @@
 {% if results %}
     <h2>Your Results:</h2>
     <div class="results-grid">
+        
         <div class="result-card low {{ 'selected' if risk_appetite == 'low' else '' }}">
             <h3>Low Risk Scenario</h3>
             <p>Final Value: £{{ results[2] }}</p>

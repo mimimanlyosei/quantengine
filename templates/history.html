@@ -11,7 +11,7 @@
     {% for scenario in scenarios %}
         <div class="scenario-card">
             <div class="scenario-card-header">
-                <span class="scenario-date">{{ scenario.created_at.strftime('%Y-%m-%d') }}</span>
+                <span class="scenario-date">{{ scenario.name or scenario.created_at.strftime('%Y-%m-%d') }}</span>
                 <span class="risk-badge {{ scenario.risk_appetite }}">{{ scenario.risk_appetite | capitalize }}</span>
             </div>
 

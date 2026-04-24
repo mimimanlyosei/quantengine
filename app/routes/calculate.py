@@ -14,8 +14,11 @@ def calculate():
     risk_appetite = ""
 
     if request.method == "POST":
+        scenario_name = request.form.get("scenario_name", "").strip()
+
         # Initialise scenario
         scenario = Scenario(user_id=current_user.id,
+            name=scenario_name or None,
             initial_investment=float(request.form.get("initial_investment")),
             expected_return=float(request.form.get("expected_return")),
             years_of_investment=int(request.form.get("years_of_investment")),
