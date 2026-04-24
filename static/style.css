@@ -66,6 +66,31 @@ nav a:hover {
 }
 
 
+/* --- Home Page ----------------- */
+
+.home-hero {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.home-hero h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+}
+
+.home-hero p {
+    color: #6b7280;
+    margin-bottom: 2rem;
+}
+
+.home-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
 /* --- Auth Forms ---------------- */
 
 .form-card {
@@ -110,7 +135,8 @@ nav a:hover {
     border-color: var(--pink);
 }
 
-button[type="submit"] {
+.btn {
+    display: inline-block;
     background-color: var(--pink);
     color: var(--text);
     border: none;
@@ -119,10 +145,11 @@ button[type="submit"] {
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
+    text-decoration: none;
     transition: opacity 0.2s;
 }
 
-button[type="submit"]:hover {
+.btn:hover {
     opacity: 0.85;
 }
 

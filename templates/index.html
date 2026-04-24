@@ -4,10 +4,22 @@
 {% block content %}
 
 
-<br>
-<h2>Risk & Return Calculator</h2>
-<p>Get started by creating an account or logging in to access our risk and return calculator.</p>
-<br><br>
-<button onclick="document.location='/register'">Register</button>
-<button onclick="document.location='/login'">Log In</button>
+
+<div class="home-hero">
+    {% if current_user.is_authenticated %}
+        <h2>Welcome, {{ current_user.username }}!</h2>
+        <p>Ready to model your next investment scenario?</p>
+        <div class="home-actions">
+            <a href="{{ url_for('calculate.calculate') }}" class="btn">Start Calculating</a>
+            <a href="{{ url_for('history.history') }}" class="btn">View History</a>
+        </div>
+    {% else %}
+        <h2>Risk & Return Calculator</h2>
+        <p>Model investment scenarios with base, optimistic and pessimistic projections.</p>
+        <div class="home-actions">
+            <a href="{{ url_for('auth.register') }}" class="btn">Register</a>
+            <a href="{{ url_for('auth.login') }}" class="btn">Log In</a>
+        </div>
+    {% endif %}
+</div>
 {% endblock %}
