@@ -3,7 +3,7 @@ services:
     name: quantengine
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install -r requirements.txt && python -c "from app import create_app, db; app = create_app(); app.app_context().push(); db.create_all()"
     startCommand: gunicorn run:app
     envVars:
       - key: SECRET_KEY
